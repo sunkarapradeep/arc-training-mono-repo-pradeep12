@@ -4,16 +4,6 @@ provider "aws" {
   region = var.aws_region
 }
 
-# Security Group for EC2 instance
-/*resource "aws_security_group" "ec2_sg" {
-  name        = "${var.namespace}-${var.organisation}-${var.environment}-ec2-sg"
-  description = "Security group for EC2 instance"
-
-  tags = {
-    Name = "${var.namespace}-${var.organisation}-${var.environment}-ec2-sg"
-  }
-}*/
-
 # Security Group for EC2 instance in the Existing VPC
 resource "aws_security_group" "ec2_sg" {
   name        = "${var.namespace}-${var.organisation}-${var.environment}-ec2-sg"
@@ -94,32 +84,4 @@ resource "aws_key_pair" "generated_key" {
   public_key = var.ssh_public_key
 }
 
-/*data "aws_vpc" "vpc" {
-  id = var.vpc_id  # Reference the correct VPC ID
-}
-
-data "aws_subnet" "public" {
-  id = var.subnet_id  # Reference the correct Subnet ID
-}*/
-
-/*resource "aws_security_group" "ec2_sg" {
-  name        = "${var.namespace}-${var.organisation}-${var.environment}-ec2-sg"
-  description = "Security group for EC2 instance"
-  vpc_id      = data.aws_vpc.vpc.id  # Ensure the security group is created in the same VPC as the subnet
-
-  tags = {
-    Name = "${var.namespace}-${var.organisation}-${var.environment}-ec2-sg"
-  }
-}*/
-
-/*resource "aws_instance" "arc_ec2" {
-  ami                    = var.ami
-  instance_type          = var.instance_type
-  key_name               = aws_key_pair.generated_key.key_name
-  subnet_id              = data.aws_subnet.public.id  # Ensure the subnet is in the same VPC as the security group
-  associate_public_ip_address = var.associate_public_ip_address
-  vpc_security_group_ids = [aws_security_group.ec2_sg.id]
-  
-  # Additional configuration...
-}*/
 
